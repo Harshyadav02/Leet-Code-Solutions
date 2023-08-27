@@ -1,45 +1,36 @@
 class Solution {
-
+  
     public int[] searchRange(int[] nums, int target) {
-        int first_occurrence = firstOccurrence(nums, target, 0, nums.length - 1);
-        int last_occurrence = lastOccurrence(nums, target, 0, nums.length - 1);
-        int[] result = {first_occurrence, last_occurrence};
-        return result;
+        int first_occurence = firstOccurance(nums, target, 0);
+        int last_occurence = lastOccurence(nums, target, 0);
+
+        int arr2[] = new int[2];
+
+        arr2[0] = first_occurence;
+        arr2[1] = last_occurence;
+
+        return arr2;
     }
 
-    public static int firstOccurrence(int[] arr, int key, int low, int high) {
-        if (low > high) {
-            return -1;
-        }
-        int mid = low + (high - low) / 2;
-        if (arr[mid] == key) {
-            if (mid == low || arr[mid - 1] != key) {
-                return mid;
-            } else {
-                return firstOccurrence(arr, key, low, mid - 1);
-            }
-        } else if (arr[mid] < key) {
-            return firstOccurrence(arr, key, mid + 1, high);
-        } else {
-            return firstOccurrence(arr, key, low, mid - 1);
-        }
+    // For first occurrence 
+    public static int firstOccurance(int arr[], int keyElement, int i) {
+        if (i == arr.length) return -1;
+
+        if (arr[i] == keyElement) return i;
+
+        return firstOccurance(arr, keyElement, i + 1);
     }
 
-    public static int lastOccurrence(int[] arr, int key, int low, int high) {
-        if (low > high) {
-            return -1;
+    // For last occurrence 
+    public static int lastOccurence(int arr[], int key, int i) {
+        if (i == arr.length) return -1;
+
+        int isFound = lastOccurence(arr, key, i + 1);
+        
+        if (isFound == -1 && arr[i] == key) {
+            return i;
         }
-        int mid = low + (high - low) / 2;
-        if (arr[mid] == key) {
-            if (mid == high || arr[mid + 1] != key) {
-                return mid;
-            } else {
-                return lastOccurrence(arr, key, mid + 1, high);
-            }
-        } else if (arr[mid] < key) {
-            return lastOccurrence(arr, key, mid + 1, high);
-        } else {
-            return lastOccurrence(arr, key, low, mid - 1);
-        }
+
+        return isFound;
     }
 }
