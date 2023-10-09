@@ -1,36 +1,49 @@
 class Solution {
   
     public int[] searchRange(int[] nums, int target) {
-        int first_occurence = firstOccurance(nums, target, 0);
-        int last_occurence = lastOccurence(nums, target, 0);
-
-        int arr2[] = new int[2];
-
-        arr2[0] = first_occurence;
-        arr2[1] = last_occurence;
-
-        return arr2;
-    }
-
-    // For first occurrence 
-    public static int firstOccurance(int arr[], int keyElement, int i) {
-        if (i == arr.length) return -1;
-
-        if (arr[i] == keyElement) return i;
-
-        return firstOccurance(arr, keyElement, i + 1);
-    }
-
-    // For last occurrence 
-    public static int lastOccurence(int arr[], int key, int i) {
-        if (i == arr.length) return -1;
-
-        int isFound = lastOccurence(arr, key, i + 1);
         
-        if (isFound == -1 && arr[i] == key) {
-            return i;
-        }
-
-        return isFound;
+        // array to hold the occurence of target 
+        
+        int array [] = new int [2] ;
+        
+        
+        // methods for finding the first and the last position of the target element 
+        int first  = firstPosition(nums , target , 0) ;
+        int last  = lastPosition(nums , target , nums.length -1) ;
+        
+        // assiging the index of the target element to array
+        array[0] = first;
+        array[1] = last;
+        
+        
+        // returning the final output 
+        return array ;
+    }
+    
+    
+    public int firstPosition(int nums[], int target ,int  i){
+        
+         // if target not present in the array  return -1
+        
+        if( i == nums.length) return -1 ;
+        
+        // if target found return the index 
+        if( nums[i] == target ) return i;
+        
+        
+        // if not found calling the function for i+1 index 
+        return firstPosition(nums , target , i+1);
+    }
+    
+    public int lastPosition(int nums[] , int target , int i){
+        
+        // if target not present in the array  return -1
+        if( i == -1 ) return -1 ;
+        
+        // if found the return the index
+        if(nums[i] == target) return i;
+        
+        // if not found calling the function for i-1 index 
+        return lastPosition(nums , target , i-1);
     }
 }
