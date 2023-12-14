@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 class Solution {
     public int[][] onesMinusZeros(int[][] grid) {
         
