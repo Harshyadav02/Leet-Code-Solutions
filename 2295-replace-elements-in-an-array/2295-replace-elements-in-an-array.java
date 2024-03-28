@@ -19,7 +19,7 @@ class Solution {
             
             nums[index] = replacingValue ;
             numsHashMap.put(replacingValue , numsHashMap.remove(originalValue)) ;
-            // numsHashMap.put(replacingValue,index)
+            
         }
         
         return nums ;
