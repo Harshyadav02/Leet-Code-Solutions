@@ -11,33 +11,32 @@
  *         this.left = left;
  *         this.right = right;
  *     }
- * }
- */
+ * }*/
+
 class Solution {
     public int sumNumbers(TreeNode root) {
-
         ArrayList<Integer> list = new ArrayList<>();
-        calSum(root,0,list);
+        StringBuilder sb = new StringBuilder();
+        calSum(root, sb, list);
         int sum = 0;
-        for(int num:list){
-
+        for (int num : list) {
             sum += num;
         }
         return sum;
     }
-    private void calSum(TreeNode root,int sum, ArrayList<Integer>list){
-
-        if(root==null){
+    
+    private void calSum(TreeNode root, StringBuilder sb, ArrayList<Integer> list) {
+        if (root == null) {
             return;
         }
-        
-        sum = sum *10 +root.val;
-        if(root.left==null && root.right==null){
-            list.add(sum);
+        sb.append(root.val);
+        if (root.left == null && root.right == null) {
+            list.add(Integer.valueOf(sb.toString()));
+            sb.deleteCharAt(sb.length() - 1);
             return;
         }
-        
-        calSum(root.left,sum,list);
-        calSum(root.right,sum,list);
+        calSum(root.left, new StringBuilder(sb), list);
+        calSum(root.right, new StringBuilder(sb), list);
+        sb.deleteCharAt(sb.length() - 1);
     }
 }
