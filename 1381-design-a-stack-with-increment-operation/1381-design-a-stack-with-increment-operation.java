@@ -28,7 +28,7 @@ class CustomStack {
         
         for(int i=0; i<Math.min(k,pointer+1); i++){
             stack[i] += val;
-            System.out.println(stack[i]);
+            
         }
     }
 }
